@@ -1,21 +1,10 @@
 # Weather
 
-**TODO: Add description**
+From Exercise: OrganizingAProject-6 in Programming Elixir by Thomas.
 
-## Installation
+Took the code from the Issues example and combined it with
+Benjamin Tan's XML parsing example: 
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+http://benjamintan.io/blog/2014/10/01/parsing-wikipedia-xml-dump-in-elixir-using-erlsom/
 
-  1. Add weather to your list of dependencies in `mix.exs`:
 
-        def deps do
-          [{:weather, "~> 0.0.1"}]
-        end
-
-  2. Ensure weather is started before your application:
-
-        def application do
-          [applications: [:weather]]
-        end
-
-# weather

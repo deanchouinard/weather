@@ -7,9 +7,9 @@ defmodule Weather.WeatherData do
 
   def fetch() do
     Logger.info "Fetching weather data"
-    weather_data_url()
-    |> HTTPoison.get(@user_agent)
-    |> handle_response
+    {:ok, response} = HTTPoison.get(weather_data_url, @user_agent)
+    response.body
+    # |> handle_response
   end
 
   def weather_data_url() do

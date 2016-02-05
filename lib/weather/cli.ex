@@ -1,6 +1,12 @@
 defmodule Weather.CLI do
   @default_count 4
 
+  require Logger
+  
+  def run() do
+    process()
+  end
+
   def main(argv) do
     argv
     |> parse_args
@@ -14,13 +20,20 @@ defmodule Weather.CLI do
     System.halt(0)
   end
 
-  def process({user, project, count}) do
-    Weather.WeatherData.fetch(user, project)
-    |> decode_response
-    |> convert_to_list_of_maps
-    |> sort_into_ascending_order
-    |> Enum.take(count)
-    |> Issues.TableFormatter.print_table_for_columns(["number", "created_at", "title"])
+  #  def process({user, project, count}) do
+  def process() do
+    xml_doc = Weather.WeatherData.fetch()
+    Logger.info "after fetch"
+    {:ok, state, _} = Saxy.parse_doc(xml_doc)
+    #    state = :erlsom.parse_sax(xml_doc, nil, &Saxy.sax_event_handler/2 )
+    IO.puts "#{state.location}"
+    Logger.info "after parse_sax"
+    # inspect(xml_doc)
+    #    |> decode_response
+    # |> convert_to_list_of_maps
+    # |> sort_into_ascending_order
+    # |> Enum.take(count)
+    # |> Issues.TableFormatter.print_table_for_columns(["number", "created_at", "title"])
   end
 
   def sort_into_ascending_order(list_of_issues) do
